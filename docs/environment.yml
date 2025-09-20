@@ -3,7 +3,8 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - pyvista
+  - pyvista==0.44.2
+  - scifem
   - jupyterlab
   - numpy
   - vtk
@@ -33,3 +34,4 @@ dependencies:
   - pip:
       - pytest-memprof
       - -r requirements.txt
+      - -e ..
