@@ -139,15 +139,6 @@ sphinx_gallery_conf = {
     # Sort gallery example by file name instead of number of lines (default)
     "within_subsection_order": FileNameSortKey,
     "subsection_order": ExplicitOrder([
-        '../../examples/LEFM',
-        '../../examples/Elasticity',
-        '../../examples/Phase_Field_Three_Point',
-        '../../examples/Phase_Field_Central_Cracked',
-        '../../examples/Phase_Field_Compact_Specimen',
-        '../../examples/Compare_Three_Point',
-        '../../examples/Compare_Central_Cracked',
-        '../../examples/Compare_Compact_Specimen',
-        '../../examples/GmshGeoFiles',
         '../../examples/Papers_Data',
     ]),
     # directory where function granular galleries are stored
