@@ -69,6 +69,14 @@ import mpi4py
 import petsc4py
 import os
 
+import pyvista as pv
+import pandas as pd
+import matplotlib.pyplot as plt
+import sys
+sys.path.insert(0, os.path.abspath('../../'))
+plt.style.use('../../graph.mplstyle')
+import plot_config as pcfg
+
 ###############################################################################
 # Import from phasefieldx package
 # -------------------------------
@@ -286,15 +294,6 @@ if run_simulation:
 # the results, including logs, energy, convergence, and DOF files.
 # Note that it is possible to load results from other results folders to compare results.
 # It is also possible to define a custom label and color to automate plot labels.
-
-import pyvista as pv
-import pandas as pd
-import matplotlib.pyplot as plt
-import sys
-sys.path.insert(0, os.path.abspath('../../'))
-plt.style.use('../../graph.mplstyle')
-import plot_config as pcfg
-
 S = AllResults(Data.results_folder_name)
 S.set_label('Simulation')
 S.set_color('b')
@@ -360,14 +359,14 @@ lambda_complete_corrected_gc        = lambda_half
 ###############################################################################
 # Plot: Phase-Field
 # -----------------
-file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000047.vtu"))
-pv.start_xvfb()
-file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
+# file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000047.vtu"))
+# pv.start_xvfb()
+# file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
 
-###############################################################################
-# Plot: Mesh
-# ----------
-file_vtu.plot(cpos='xy', color='white', show_edges=True)
+# ###############################################################################
+# # Plot: Mesh
+# # ----------
+# file_vtu.plot(cpos='xy', color='white', show_edges=True)
 
 
 

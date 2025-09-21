@@ -69,6 +69,14 @@ import mpi4py
 import petsc4py
 import os
 
+import pyvista as pv
+import pandas as pd
+import matplotlib.pyplot as plt
+import sys
+sys.path.insert(0, os.path.abspath('../../'))
+plt.style.use('../../graph.mplstyle')
+import plot_config as pcfg
+
 ###############################################################################
 # Import from phasefieldx package
 # -------------------------------
@@ -100,6 +108,7 @@ def solve(Data,
 
 from phasefieldx.Boundary.boundary_conditions import bc_y, bc_x, get_ds_bound_from_marker
 from phasefieldx.PostProcessing.ReferenceResult import AllResults
+
 
 ###############################################################################
 # Parameters Definition
@@ -311,15 +320,6 @@ if run_simulation:
 # the results, including logs, energy, convergence, and DOF files.
 # Note that it is possible to load results from other results folders to compare results.
 # It is also possible to define a custom label and color to automate plot labels.
-
-import pyvista as pv
-import pandas as pd
-import matplotlib.pyplot as plt
-import sys
-sys.path.insert(0, os.path.abspath('../../'))
-plt.style.use('../../graph.mplstyle')
-import plot_config as pcfg
-
 S = AllResults(Data.results_folder_name)
 S.set_label('Simulation')
 S.set_color('b')
@@ -374,17 +374,17 @@ gamma_phi_complete_equivalent    = a0 + 2.0 * S.energy_files['total.energy']["ga
 gamma_gradphi_complete_equivalent = a0 + 2.0 * S.energy_files['total.energy']["gamma_gradphi"][:aux]
 lambda_complete_equivalent        = lambda_complete
 
-header = ["displacement", "force", "gamma", "compliance", "stiffness", "dCda", "lambda"]
-data_save = np.column_stack((displacement_complete_equivalent, 
-                             force_complete_equivalent,
-                             gamma_complete_equivalent,
-                             compliance_complete_equivalent,
-                             stiffness_complete_equivalent,
-                             dCda_complete_equivalent,
-                             lambda_complete_equivalent))
+# header = ["displacement", "force", "gamma", "compliance", "stiffness", "dCda", "lambda"]
+# data_save = np.column_stack((displacement_complete_equivalent, 
+#                              force_complete_equivalent,
+#                              gamma_complete_equivalent,
+#                              compliance_complete_equivalent,
+#                              stiffness_complete_equivalent,
+#                              dCda_complete_equivalent,
+#                              lambda_complete_equivalent))
 
-save_path = os.path.join(Data.results_folder_name, "results_equivalent.pff")
-np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(header), comments="")
+# save_path = os.path.join(Data.results_folder_name, "results_equivalent.pff")
+# np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(header), comments="")
 
 
 ###############################################################################
