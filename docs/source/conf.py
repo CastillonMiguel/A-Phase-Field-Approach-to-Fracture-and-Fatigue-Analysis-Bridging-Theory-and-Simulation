@@ -18,7 +18,6 @@ import os
 import sys
 # sys.path.insert(0, os.path.abspath('../../src/phasefieldx'))
 
-
 # -- Project information -----------------------------------------------------
 project = "A Phase-Field Approach to Fracture and Fatigue Analysis: Bridging Theory and Simulation"
 copyright = '2025, Miguel Castillón'
@@ -28,6 +27,12 @@ author = 'Miguel Castillón'
 release = '0.1'
 language = "en"
 
+autodoc_mock_imports = [
+    "dolfinx",
+    "petsc4py",
+    "mpi4py",
+    "phasefieldx",
+]
 
 # -- pyvista configuration ---------------------------------------------------
 import pyvista
