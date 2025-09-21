@@ -42,10 +42,10 @@ from phasefieldx.Loading.loading_functions import loading_Txy, loading_Txyz
 # Import necessary libraries
 # --------------------------
 import numpy as np
-import dolfinx
-import mpi4py
-import petsc4py
-import os
+# import dolfinx
+# import mpi4py
+# import petsc4py
+# import os
 
 # ###############################################################################
 # # Import from phasefieldx package

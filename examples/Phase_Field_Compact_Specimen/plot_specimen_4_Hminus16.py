@@ -15,10 +15,10 @@ The mesh used for this simulation is generated using Gmsh and is based on the ge
 # Import necessary libraries
 # --------------------------
 import numpy as np
-import dolfinx
-import mpi4py
-import petsc4py
-import os
+# import dolfinx
+# import mpi4py
+# import petsc4py
+# import os
 
 # ###############################################################################
 # # Import from phasefieldx package
