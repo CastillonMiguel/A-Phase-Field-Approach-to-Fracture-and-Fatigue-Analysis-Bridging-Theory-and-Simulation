@@ -32,6 +32,6 @@ dependencies:
   - trame-vtk>=2.5.8
   - typing-extensions
   - pip:
-      - git+https://github.com/CastillonMiguel/phasefieldx.git@energy-solvers#egg=phasefieldx
       - pytest-memprof
       - -r requirements.txt
+      - -e "git+https://github.com/CastillonMiguel/phasefieldx.git@energy-solvers#egg=phasefieldx"

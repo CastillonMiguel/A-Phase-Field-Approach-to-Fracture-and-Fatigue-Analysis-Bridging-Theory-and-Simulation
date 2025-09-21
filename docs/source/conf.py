@@ -14,10 +14,11 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-import os
-import sys
-# sys.path.insert(0, os.path.abspath('../../src/phasefieldx'))
-
+# import os
+# import sys
+# # sys.path.insert(0, os.path.abspath('../../src/phasefieldx'))
+import sys, os
+sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 project = "A Phase-Field Approach to Fracture and Fatigue Analysis: Bridging Theory and Simulation"
