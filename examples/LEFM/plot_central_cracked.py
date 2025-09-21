@@ -32,9 +32,9 @@ plt.style.use('../../graph.mplstyle')
 import plot_config as pcfg
 
 
-# img = mpimg.imread('images/central_cracked.png')  # or .jpg, .tif, etc.
-# plt.imshow(img)
-# plt.axis('off')
+img = mpimg.imread('images/central_cracked.png')  # or .jpg, .tif, etc.
+plt.imshow(img)
+plt.axis('off')
 
 results_folder = "results_central_cracked"
 if os.path.exists(results_folder):

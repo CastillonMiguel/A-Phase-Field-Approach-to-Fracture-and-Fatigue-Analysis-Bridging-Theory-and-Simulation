@@ -75,9 +75,9 @@ sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle')
 import plot_config as pcfg
 
-# img = mpimg.imread('images/three_point_bending.png')  # or .jpg, .tif, etc.
-# plt.imshow(img)
-# plt.axis('off')
+img = mpimg.imread('images/three_point_bending.png')  # or .jpg, .tif, etc.
+plt.imshow(img)
+plt.axis('off')
 
 results_folder = "results_three_point"
 if os.path.exists(results_folder):

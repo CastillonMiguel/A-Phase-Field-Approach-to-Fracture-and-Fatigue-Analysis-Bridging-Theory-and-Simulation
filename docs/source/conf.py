@@ -240,7 +240,7 @@ html_theme_options = {
     'icon_links': [
         {
             'name': 'The Paper',
-            'url': 'https://github.com/CastillonMiguel/A-Phase-Field-Approach-to-Fracture-and-Fatigue-Analysis-Bridging-Theory-and-Simulation',
+            'url': 'https://arxiv.org/abs/2509.08939',
             'icon': 'fa fa-file-text fa-fw',
         },
     ],
