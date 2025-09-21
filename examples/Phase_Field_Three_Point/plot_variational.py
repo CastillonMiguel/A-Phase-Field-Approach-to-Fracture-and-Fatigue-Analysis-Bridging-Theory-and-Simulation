@@ -74,6 +74,30 @@ import os
 # -------------------------------
 from phasefieldx.Element.Phase_Field_Fracture.Input import Input
 # from phasefieldx.Element.Phase_Field_Fracture.solver.solver_ener_variational import solve
+
+def solve(Data,
+          msh,
+          final_gamma,
+          V_u,
+          V_Φ,
+          bc_list_u=[],
+          bc_list_phi=[],
+          f_list_u=None,
+          T_list_u=None,
+          ds_bound=None,
+          dt=0.0005,
+          dt_min=1e-12,
+          dt_max=0.1,
+          path=None,
+          bcs_list_u_names=None,
+          c1=1.0,
+          c2=1.0,
+          threshold_gamma_save=None,
+          continue_simulation=False,
+          step_continue=10):
+    return print("Check docs")
+
+
 from phasefieldx.Boundary.boundary_conditions import bc_y, bc_x, get_ds_bound_from_marker
 from phasefieldx.PostProcessing.ReferenceResult import AllResults
 
@@ -329,10 +353,10 @@ gamma_phi_complete     = a0 + 2.0 * S.energy_files['total.energy']["gamma_phi"][
 gamma_gradphi_complete = a0 + 2.0 * S.energy_files['total.energy']["gamma_gradphi"][:aux]
 lambda_complete        = lambda_half
 
-header = ["displacement", "force", "gamma", "compliance", "stiffness", "dCda", "lambda"]
-data_save = np.column_stack((displacement_complete, force_complete, gamma_complete, compliance_complete,stiffness_complete, dCda_complete, lambda_complete ))
-save_path = os.path.join(Data.results_folder_name, "results.pff")
-np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(header), comments="")
+# header = ["displacement", "force", "gamma", "compliance", "stiffness", "dCda", "lambda"]
+# data_save = np.column_stack((displacement_complete, force_complete, gamma_complete, compliance_complete,stiffness_complete, dCda_complete, lambda_complete ))
+# save_path = os.path.join(Data.results_folder_name, "results.pff")
+# np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(header), comments="")
 
 
 ###############################################################################
