@@ -96,21 +96,27 @@ from phasefieldx.PostProcessing.ReferenceResult import AllResults
 # - `results_folder_name`: Name of the folder for saving results. If it exists,
 #   it will be replaced with a new empty folder.
 Data = Input(E=20.8,
-             nu=0.3,
-             Gc=0.0005,
-             l=0.03,
-             degradation="anisotropic",
-             split_energy="spectral",
-             degradation_function="quadratic",
-             irreversibility="no",
-             fatigue=False,
-             fatigue_degradation_function="no",
-             fatigue_val=0.0,
-             k=0.0,
-             save_solution_xdmf=False,
-             save_solution_vtu=True,
-             results_folder_name="results_non_variational")
+            nu=0.3,
+            Gc=0.0005,
+            l=0.03,
+            degradation="anisotropic",
+            split_energy="spectral",
+            degradation_function="quadratic",
+            irreversibility="no",
+            fatigue=False,
+            fatigue_degradation_function="no",
+            fatigue_val=0.0,
+            k=0.0,
+            save_solution_xdmf=False,
+            save_solution_vtu=True,
+            results_folder_name="results_non_variational")
 
+# %%
+# The variable `a0` defines the initial crack length in the mesh. This parameter
+# is crucial for setting up the simulation, as it determines the starting point
+# of the crack in the domain.
+a0 = 0.2  # Initial crack length in the mesh
+    
 ###############################################################################
 # Mesh Definition
 # ---------------
@@ -121,156 +127,155 @@ Data = Input(E=20.8,
 divx, divy = 400, 100
 lx, ly = 4.0, 1.0
 h = ly / divy
-msh = dolfinx.mesh.create_rectangle(mpi4py.MPI.COMM_WORLD,
-                                    [np.array([-lx, 0.0]),
-                                     np.array([0.0, ly])],
-                                    [divx, divy],
-                                    cell_type=dolfinx.mesh.CellType.quadrilateral)
 
-fdim = msh.topology.dim - 1 # Dimension of the mesh facets
+run_simulation = False
 
-# %%
-# The variable `a0` defines the initial crack length in the mesh. This parameter
-# is crucial for setting up the simulation, as it determines the starting point
-# of the crack in the domain.
-a0 = 0.2  # Initial crack length in the mesh
+if run_simulation:
+    msh = dolfinx.mesh.create_rectangle(mpi4py.MPI.COMM_WORLD,
+                                        [np.array([-lx, 0.0]),
+                                        np.array([0.0, ly])],
+                                        [divx, divy],
+                                        cell_type=dolfinx.mesh.CellType.quadrilateral)
 
-###############################################################################
-# Boundary Identification Functions
-# ---------------------------------
-# These functions identify points on the specific boundaries of the domain
-# where boundary conditions will be applied. The `bottom_left` function checks 
-# if a point lies on the bottom left boundary, returning `True` for points where 
-# `y=0` and `x` is less than `-lx + surface`, and `False` otherwise. Similarly, 
-# the `center` function identifies points on the center boundary, returning `True` 
-# for points where `x=0` and `y` is greater than or equal to `a0`. The `top` function 
-# identifies points on the top boundary, returning `True` for points where `y=ly`, 
-# and `x` is greater than or equal to `-surface`, and `False` otherwise.
-#
-# This approach ensures that boundary conditions are applied to specific parts of 
-# the mesh, which helps in defining the simulation's physical constraints.
-
-surface = 0.075
-def bottom_left(x):
-    return np.logical_and(np.isclose(x[1], 0), np.less(x[0], -lx + surface))
-
-def center(x):
-    return np.logical_and(np.isclose(x[0], 0), np.greater_equal(x[1], a0))
-
-def top(x):
-    return np.logical_and(np.isclose(x[1], ly), np.greater_equal(x[0], -surface))
+    fdim = msh.topology.dim - 1 # Dimension of the mesh facets
 
 
-# %%
-# Using the `bottom_left`, `center`, and `top` functions, we locate the facets on the respective boundaries of the mesh:
-# - `bottom_left`: Identifies facets on the bottom left side of the mesh where `y = 0` and `x < -lx + surface`.
-# - `center`: Identifies facets on the center boundary where `x = 0` and `y >= a0`.
-# - `top`: Identifies facets on the top side of the mesh where `y = ly` and `x >= -surface`.
-# The `locate_entities_boundary` function returns an array of facet indices representing these identified boundary entities.
-bottom_left_facet_marker = dolfinx.mesh.locate_entities_boundary(msh, fdim, bottom_left)
-center_facet_marker = dolfinx.mesh.locate_entities_boundary(msh, fdim, center)
-top_facet_marker = dolfinx.mesh.locate_entities_boundary(msh, fdim, top)
+    ###############################################################################
+    # Boundary Identification Functions
+    # ---------------------------------
+    # These functions identify points on the specific boundaries of the domain
+    # where boundary conditions will be applied. The `bottom_left` function checks 
+    # if a point lies on the bottom left boundary, returning `True` for points where 
+    # `y=0` and `x` is less than `-lx + surface`, and `False` otherwise. Similarly, 
+    # the `center` function identifies points on the center boundary, returning `True` 
+    # for points where `x=0` and `y` is greater than or equal to `a0`. The `top` function 
+    # identifies points on the top boundary, returning `True` for points where `y=ly`, 
+    # and `x` is greater than or equal to `-surface`, and `False` otherwise.
+    #
+    # This approach ensures that boundary conditions are applied to specific parts of 
+    # the mesh, which helps in defining the simulation's physical constraints.
+
+    surface = 0.075
+    def bottom_left(x):
+        return np.logical_and(np.isclose(x[1], 0), np.less(x[0], -lx + surface))
+
+    def center(x):
+        return np.logical_and(np.isclose(x[0], 0), np.greater_equal(x[1], a0))
+
+    def top(x):
+        return np.logical_and(np.isclose(x[1], ly), np.greater_equal(x[0], -surface))
 
 
-# %%
-# The `get_ds_bound_from_marker` function generates a measure for applying boundary conditions 
-# specifically to the surface marker where the load will be applied, identified by `top_facet_marker`. 
-# This measure is then assigned to `ds_top`.
-ds_top = get_ds_bound_from_marker(top_facet_marker, msh, fdim)
-
-# %%
-# `ds_list` is an array that stores boundary condition measures along with names 
-# for each boundary, simplifying result-saving processes. Each entry in `ds_list` 
-# is formatted as `[ds_, "name"]`, where `ds_` represents the boundary condition measure, 
-# and `"name"` is a label used for saving. Here, `ds_bottom` and `ds_top` are labeled 
-# as `"bottom"` and `"top"`, respectively, to ensure clarity when saving results.
-ds_list = np.array([
-                   [ds_top, "top"],
-                   ])
+    # %%
+    # Using the `bottom_left`, `center`, and `top` functions, we locate the facets on the respective boundaries of the mesh:
+    # - `bottom_left`: Identifies facets on the bottom left side of the mesh where `y = 0` and `x < -lx + surface`.
+    # - `center`: Identifies facets on the center boundary where `x = 0` and `y >= a0`.
+    # - `top`: Identifies facets on the top side of the mesh where `y = ly` and `x >= -surface`.
+    # The `locate_entities_boundary` function returns an array of facet indices representing these identified boundary entities.
+    bottom_left_facet_marker = dolfinx.mesh.locate_entities_boundary(msh, fdim, bottom_left)
+    center_facet_marker = dolfinx.mesh.locate_entities_boundary(msh, fdim, center)
+    top_facet_marker = dolfinx.mesh.locate_entities_boundary(msh, fdim, top)
 
 
-###############################################################################
-# Function Space Definition
-# -------------------------
-# Define function spaces for displacement and phase-field using Lagrange elements.
-V_u = dolfinx.fem.functionspace(msh, ("Lagrange", 1, (msh.geometry.dim, )))
-V_phi = dolfinx.fem.functionspace(msh, ("Lagrange", 1))
+    # %%
+    # The `get_ds_bound_from_marker` function generates a measure for applying boundary conditions 
+    # specifically to the surface marker where the load will be applied, identified by `top_facet_marker`. 
+    # This measure is then assigned to `ds_top`.
+    ds_top = get_ds_bound_from_marker(top_facet_marker, msh, fdim)
+
+    # %%
+    # `ds_list` is an array that stores boundary condition measures along with names 
+    # for each boundary, simplifying result-saving processes. Each entry in `ds_list` 
+    # is formatted as `[ds_, "name"]`, where `ds_` represents the boundary condition measure, 
+    # and `"name"` is a label used for saving. Here, `ds_bottom` and `ds_top` are labeled 
+    # as `"bottom"` and `"top"`, respectively, to ensure clarity when saving results.
+    ds_list = np.array([
+                    [ds_top, "top"],
+                    ])
 
 
-###############################################################################
-# Boundary Conditions
-# -------------------
-# Dirichlet boundary conditions are defined as follows:
-#
-# - `bc_bottom_left`: Constrains both x and y displacements on the bottom left boundary, 
-#   ensuring that the leftmost bottom edge remains fixed.
-# - `bc_bottom_right`: Constrains only the vertical displacement (y-displacement) on the 
-#   bottom left boundary, while allowing horizontal movement.
-#
-# These boundary conditions ensure that the relevant portions of the mesh are correctly 
-# fixed or allowed to move according to the simulation requirements.
-
-bc_bottom_left = bc_y(bottom_left_facet_marker, V_u, fdim)
-bc_center = bc_x(center_facet_marker, V_u, fdim)
-
-# %%
-# The bcs_list_u variable is a list that stores all boundary conditions for the displacement
-# field $\boldsymbol u$. This list facilitates easy management of multiple boundary
-# conditions and can be expanded if additional conditions are needed.
-bcs_list_u = [bc_bottom_left, bc_center]
-bcs_list_u_names = ["bottom_left",  "center"]
-
-###############################################################################
-# External Load Definition
-# ------------------------
-# Here, we define the external load to be applied to the top boundary (`ds_top`). 
-# `T_top` represents the external force applied in the y-direction.
-
-T_top = dolfinx.fem.Constant(msh, petsc4py.PETSc.ScalarType((0.0, -1.0/surface)))
-
-# %%
-# The load is added to the list of external loads, `T_list_u`.
-T_list_u = [
-           [T_top, ds_top]
-           ]
-f = None
-
-###############################################################################
-# Boundary Conditions for phase field
-bcs_list_phi = []
+    ###############################################################################
+    # Function Space Definition
+    # -------------------------
+    # Define function spaces for displacement and phase-field using Lagrange elements.
+    V_u = dolfinx.fem.functionspace(msh, ("Lagrange", 1, (msh.geometry.dim, )))
+    V_phi = dolfinx.fem.functionspace(msh, ("Lagrange", 1))
 
 
-###############################################################################
-# Solver Call for a Phase-Field Fracture Problem
-# ----------------------------------------------
-final_gamma = 0.5
+    ###############################################################################
+    # Boundary Conditions
+    # -------------------
+    # Dirichlet boundary conditions are defined as follows:
+    #
+    # - `bc_bottom_left`: Constrains both x and y displacements on the bottom left boundary, 
+    #   ensuring that the leftmost bottom edge remains fixed.
+    # - `bc_bottom_right`: Constrains only the vertical displacement (y-displacement) on the 
+    #   bottom left boundary, while allowing horizontal movement.
+    #
+    # These boundary conditions ensure that the relevant portions of the mesh are correctly 
+    # fixed or allowed to move according to the simulation requirements.
 
-# %%
-# Uncomment the following lines to run the solver with the specified parameters.
+    bc_bottom_left = bc_y(bottom_left_facet_marker, V_u, fdim)
+    bc_center = bc_x(center_facet_marker, V_u, fdim)
 
-c1 = 1.0
-c2 = 1.0
+    # %%
+    # The bcs_list_u variable is a list that stores all boundary conditions for the displacement
+    # field $\boldsymbol u$. This list facilitates easy management of multiple boundary
+    # conditions and can be expanded if additional conditions are needed.
+    bcs_list_u = [bc_bottom_left, bc_center]
+    bcs_list_u_names = ["bottom_left",  "center"]
 
-# solve(Data,
-#       msh,
-#       final_gamma,
-#       V_u,
-#       V_phi,
-#       bcs_list_u,
-#       bcs_list_phi,
-#       f,
-#       T_list_u,
-#       ds_list,
-#       dt=0.001,
-#       dt_min=1e-12,
-#       dt_max=1.0,
-#       path=None,
-#       bcs_list_u_names=bcs_list_u_names,
-#       c1=c1,
-#       c2=c2,
-#       threshold_gamma_save=0.01,
-#       continue_simulation=False,
-#       step_continue=0)
+    ###############################################################################
+    # External Load Definition
+    # ------------------------
+    # Here, we define the external load to be applied to the top boundary (`ds_top`). 
+    # `T_top` represents the external force applied in the y-direction.
+
+    T_top = dolfinx.fem.Constant(msh, petsc4py.PETSc.ScalarType((0.0, -1.0/surface)))
+
+    # %%
+    # The load is added to the list of external loads, `T_list_u`.
+    T_list_u = [
+            [T_top, ds_top]
+            ]
+    f = None
+
+    ###############################################################################
+    # Boundary Conditions for phase field
+    bcs_list_phi = []
+
+
+    ###############################################################################
+    # Solver Call for a Phase-Field Fracture Problem
+    # ----------------------------------------------
+    final_gamma = 0.5
+
+    # %%
+    # Uncomment the following lines to run the solver with the specified parameters.
+
+    c1 = 1.0
+    c2 = 1.0
+
+    solve(Data,
+        msh,
+        final_gamma,
+        V_u,
+        V_phi,
+        bcs_list_u,
+        bcs_list_phi,
+        f,
+        T_list_u,
+        ds_list,
+        dt=0.001,
+        dt_min=1e-12,
+        dt_max=1.0,
+        path=None,
+        bcs_list_u_names=bcs_list_u_names,
+        c1=c1,
+        c2=c2,
+        threshold_gamma_save=0.01,
+        continue_simulation=False,
+        step_continue=0)
 
 
 ##############################################################################
@@ -430,45 +435,3 @@ ax_reaction.set_ylabel(pcfg.dCda_label)
 ax_reaction.legend()
 
 plt.show()
-
-
-save_image=False
-# Create a PyVista plotter
-if save_image:
-    file_vtu_05 = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000005.vtu"))
-    file_vtu_20 = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000020.vtu"))
-    file_vtu_47 = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000047.vtu"))
-
-    for idx, file_vtu_case in zip([5, 10, 15], [file_vtu_05, file_vtu_20, file_vtu_47]):
-        # Original image
-        plotter = pv.Plotter(off_screen=True)
-        plotter.add_mesh(file_vtu_case, scalars='phi')
-        plotter.view_xy()
-        plotter.remove_scalar_bar()
-        plotter.set_background('white')
-        plotter.camera.tight(padding=0.0)
-        plotter.camera.clipping_range = (0.1, 1000.0)
-        plotter.window_size = (400, 100)
-        plotter.screenshot(os.path.join(Data.results_folder_name, f'paraview_phi_{idx:02d}.png'),
-                        transparent_background=False,
-                        return_img=False)
-        plotter.close()
-
-        # Symmetric image (mirrored about right vertical axis)
-        mirrored_mesh = file_vtu_case.copy()
-        mirrored_mesh.points[:, 0] *= -1  # Reflect x-coordinates
-        # Combine original and mirrored mesh
-        combined_mesh = file_vtu_case.merge(mirrored_mesh, merge_points=False)
-        plotter_sym = pv.Plotter(off_screen=True)
-        plotter_sym.add_mesh(combined_mesh, scalars='phi')
-        plotter_sym.view_xy()
-        plotter_sym.remove_scalar_bar()
-        plotter_sym.set_background('white')
-        plotter_sym.camera.tight(padding=0.0)
-        plotter_sym.camera.clipping_range = (0.1, 1000.0)
-        plotter_sym.window_size = (800, 200)
-        plotter_sym.screenshot(os.path.join(Data.results_folder_name, f'paraview_phi_sym_{idx:02d}.png'),
-                            transparent_background=False,
-                            return_img=False)
-        plotter_sym.close()
-    
