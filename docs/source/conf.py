@@ -141,6 +141,7 @@ sphinx_gallery_conf = {
     "subsection_order": ExplicitOrder([
         '../../examples/LEFM',
         '../../examples/Elasticity',
+        '../../examples/Phase_Field_Three_Point',
         '../../examples/GmshGeoFiles',
         '../../examples/Papers_Data',
     ]),
