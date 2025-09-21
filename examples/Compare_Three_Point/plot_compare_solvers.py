@@ -35,8 +35,6 @@ if not os.path.exists(results_folder):
 ###############################################################################
 # Import from phasefieldx package
 # -------------------------------
-from phasefieldx.PostProcessing.ReferenceResult import AllResults
-
 
 Gc = 0.0005
 B = 1.0
