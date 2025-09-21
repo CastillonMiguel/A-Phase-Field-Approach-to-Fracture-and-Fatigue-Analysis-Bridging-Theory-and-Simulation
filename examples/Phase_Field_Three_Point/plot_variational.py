@@ -80,10 +80,10 @@ import plot_config as pcfg
 ###############################################################################
 # Import from phasefieldx package
 # -------------------------------
-from phasefieldx.Element.Phase_Field_Fracture.Input import Input
-# from phasefieldx.Element.Phase_Field_Fracture.solver.solver_ener_variational import solve
-from phasefieldx.Boundary.boundary_conditions import bc_y, bc_x, get_ds_bound_from_marker
-from phasefieldx.PostProcessing.ReferenceResult import AllResults
+# from phasefieldx.Element.Phase_Field_Fracture.Input import Input
+# # from phasefieldx.Element.Phase_Field_Fracture.solver.solver_ener_variational import solve
+# from phasefieldx.Boundary.boundary_conditions import bc_y, bc_x, get_ds_bound_from_marker
+# from phasefieldx.PostProcessing.ReferenceResult import AllResults
 
 
 ###############################################################################
@@ -104,21 +104,21 @@ from phasefieldx.PostProcessing.ReferenceResult import AllResults
 #   In this case, results are saved as `.vtu` files.
 # - `results_folder_name`: Name of the folder for saving results. If it exists,
 #   it will be replaced with a new empty folder.
-Data = Input(E=20.8,
-             nu=0.3,
-             Gc=0.0005,
-             l=0.03,
-             degradation="anisotropic",
-             split_energy="spectral",
-             degradation_function="quadratic",
-             irreversibility="no",
-             fatigue=False,
-             fatigue_degradation_function="no",
-             fatigue_val=0.0,
-             k=0.0,
-             save_solution_xdmf=False,
-             save_solution_vtu=True,
-             results_folder_name="results_variational")
+# Data = Input(E=20.8,
+#              nu=0.3,
+#              Gc=0.0005,
+#              l=0.03,
+#              degradation="anisotropic",
+#              split_energy="spectral",
+#              degradation_function="quadratic",
+#              irreversibility="no",
+#              fatigue=False,
+#              fatigue_degradation_function="no",
+#              fatigue_val=0.0,
+#              k=0.0,
+#              save_solution_xdmf=False,
+#              save_solution_vtu=True,
+#              results_folder_name="results_variational")
 
 # %%
 # The variable `a0` defines the initial crack length in the mesh. This parameter
@@ -130,7 +130,7 @@ a0 = 0.2  # Initial crack length in the mesh
 ###############################################################################
 # Plot: Phase-Field
 # -----------------
-file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000016.vtu"))
+file_vtu = pv.read(os.path.join("results_variational", "paraview-solutions_vtu", "phasefieldx_p0_000016.vtu"))
 pv.start_xvfb()
 file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
 
