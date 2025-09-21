@@ -75,9 +75,9 @@ sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle')
 import plot_config as pcfg
 
-img = mpimg.imread('images/compact_specimen.png')  # or .jpg, .tif, etc.
-plt.imshow(img)
-plt.axis('off')
+# img = mpimg.imread('images/compact_specimen.png')  # or .jpg, .tif, etc.
+# plt.imshow(img)
+# plt.axis('off')
 
 ###############################################################################
 # Import from phasefieldx package

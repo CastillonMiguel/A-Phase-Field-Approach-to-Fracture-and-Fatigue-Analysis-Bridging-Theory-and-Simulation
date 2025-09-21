@@ -32,9 +32,9 @@ plt.style.use('../../graph.mplstyle')
 import plot_config as pcfg
 
 
-img = mpimg.imread('images/central_cracked.png')  # or .jpg, .tif, etc.
-plt.imshow(img)
-plt.axis('off')
+# img = mpimg.imread('images/central_cracked.png')  # or .jpg, .tif, etc.
+# plt.imshow(img)
+# plt.axis('off')
 
 results_folder = "results_central_cracked"
 if os.path.exists(results_folder):
@@ -291,7 +291,7 @@ ax1.set_xlabel(pcfg.displacement_label)
 ax1.set_ylabel(pcfg.force_label)
 ax1.legend()
 
-plt.savefig(os.path.join(results_folder, "compare_gc_force_vs_displacement"))
+# plt.savefig(os.path.join(results_folder, "compare_gc_force_vs_displacement"))
 plt.show()
 
 
@@ -309,7 +309,7 @@ ax1.set_ylabel(pcfg.force_label)
 ax1.legend()
 ax1.set_xlim(0, 0.025)
 ax1.set_ylim(0, 1.65)
-plt.savefig(os.path.join(results_folder, "force_vs_displacement"))
+# plt.savefig(os.path.join(results_folder, "force_vs_displacement"))
 plt.show()
 
 ###############################################################################
