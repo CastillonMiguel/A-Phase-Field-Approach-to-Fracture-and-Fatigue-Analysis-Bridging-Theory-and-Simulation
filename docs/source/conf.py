@@ -14,11 +14,10 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-# import os
-# import sys
-# # sys.path.insert(0, os.path.abspath('../../src/phasefieldx'))
-import sys, os
-sys.path.insert(0, os.path.abspath('../..'))
+import os
+import sys
+# sys.path.insert(0, os.path.abspath('../../src/phasefieldx'))
+
 
 # -- Project information -----------------------------------------------------
 project = "A Phase-Field Approach to Fracture and Fatigue Analysis: Bridging Theory and Simulation"
@@ -95,10 +94,10 @@ extensions = [
     'sphinx_math_dollar',
     'sphinx_gallery.gen_gallery',
     'pyvista.ext.plot_directive',  #'matplotlib.sphinxext.plot_directive',
-    "pyvista.ext.viewer_directive",
-    "sphinx_design",
-    "sphinxcontrib.tikz",
-    "sphinxcontrib.bibtex",
+    'pyvista.ext.viewer_directive',
+    'sphinx_design',
+    'sphinxcontrib.tikz',
+    'sphinxcontrib.bibtex',
 ]
 
 bibtex_bibfiles = ['../../references.bib']
@@ -123,7 +122,6 @@ class ResetPyVista:
 
 
 reset_pyvista = ResetPyVista()
-
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="trame.app")
 nbsphinx_execute = 'auto'

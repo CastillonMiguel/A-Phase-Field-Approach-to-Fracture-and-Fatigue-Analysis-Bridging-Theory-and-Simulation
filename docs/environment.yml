@@ -34,4 +34,4 @@ dependencies:
   - pip:
       - pytest-memprof
       - -r requirements.txt
-      - -e "git+https://github.com/CastillonMiguel/phasefieldx.git@energy-solvers#egg=phasefieldx"
+      - phasefieldx
