@@ -16,32 +16,32 @@ The mesh used for this simulation is generated using Gmsh and is based on the ge
 # Import necessary libraries
 # --------------------------
 import numpy as np
-import matplotlib.pyplot as plt
-import pyvista as pv
-import dolfinx
-import mpi4py
-import petsc4py
-import os
+# import matplotlib.pyplot as plt
+# import pyvista as pv
+# import dolfinx
+# import mpi4py
+# import petsc4py
+# import os
 
-plt.style.use('../../graph.mplstyle')  # Use a predefined style for consistent plots
+# plt.style.use('../../graph.mplstyle')  # Use a predefined style for consistent plots
 
-###############################################################################
-# Import from phasefieldx package
-# -------------------------------
-from phasefieldx.Element.Phase_Field_Fracture.Input import Input
-from phasefieldx.Element.Phase_Field_Fracture.solver.solver_ener_non_variational import solve
+# ###############################################################################
+# # Import from phasefieldx package
+# # -------------------------------
+# from phasefieldx.Element.Phase_Field_Fracture.Input import Input
+# from phasefieldx.Element.Phase_Field_Fracture.solver.solver_ener_non_variational import solve
 
-from phasefieldx.PostProcessing.ReferenceResult import AllResults
+# from phasefieldx.PostProcessing.ReferenceResult import AllResults
 
-from phasefieldx.Boundary.boundary_conditions import bc_xy, bc_y, bc_x, bc_z, get_ds_bound_from_marker
-from phasefieldx.Loading.loading_functions import loading_Txy, loading_Txyz
+# from phasefieldx.Boundary.boundary_conditions import bc_xy, bc_y, bc_x, bc_z, get_ds_bound_from_marker
+# from phasefieldx.Loading.loading_functions import loading_Txy, loading_Txyz
 
 
 
 ###############################################################################
 # Import necessary libraries
 # --------------------------
-import numpy as np
+# import numpy as np
 # import dolfinx
 # import mpi4py
 # import petsc4py
