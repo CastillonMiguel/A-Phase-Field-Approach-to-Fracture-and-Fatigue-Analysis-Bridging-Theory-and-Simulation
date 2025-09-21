@@ -150,6 +150,7 @@ sphinx_gallery_conf = {
         '../../examples/Phase_Field_Compact_Specimen',
         '../../examples/Compare_Three_Point',
         '../../examples/Compare_Central_Cracked',
+        '../../examples/Compare_Compact_Specimen',
         '../../examples/GmshGeoFiles',
         '../../examples/Papers_Data',
     ]),
