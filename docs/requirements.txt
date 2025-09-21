@@ -35,4 +35,3 @@ trame-vuetify
 trimesh
 pandas
 gmsh
-phasefieldx
