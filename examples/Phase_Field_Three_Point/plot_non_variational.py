@@ -347,10 +347,10 @@ gamma_phi_complete_corrected_gc     = a0 + 2.0 * S.energy_files['total.energy'][
 gamma_gradphi_complete_corrected_gc = a0 + 2.0 * S.energy_files['total.energy']["gamma_gradphi"][:aux]/gc_factor
 lambda_complete_corrected_gc        = lambda_half
 
-header = ["displacement", "force", "gamma", "compliance", "stiffness", "dCda", "lambda"]
-data_save = np.column_stack((displacement_complete_corrected_gc, force_complete_corrected_gc, gamma_complete_corrected_gc, compliance_complete_corrected_gc,stiffness_complete_corrected_gc, dCda_complete_corrected_gc, lambda_complete_corrected_gc))
-save_path = os.path.join(Data.results_folder_name, "results_corrected_bourdin.pff")
-np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(header), comments="")
+# header = ["displacement", "force", "gamma", "compliance", "stiffness", "dCda", "lambda"]
+# data_save = np.column_stack((displacement_complete_corrected_gc, force_complete_corrected_gc, gamma_complete_corrected_gc, compliance_complete_corrected_gc,stiffness_complete_corrected_gc, dCda_complete_corrected_gc, lambda_complete_corrected_gc))
+# save_path = os.path.join(Data.results_folder_name, "results_corrected_bourdin.pff")
+# np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(header), comments="")
 
 # Load as pandas DataFrame using header from the first line of the file
 # data = pd.read_csv(save_path, delimiter="\t", comment="#", header=0)
@@ -361,7 +361,7 @@ np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(he
 # Plot: Phase-Field
 # -----------------
 file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000047.vtu"))
-# pv.start_xvfb()
+pv.start_xvfb()
 file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
 
 ###############################################################################

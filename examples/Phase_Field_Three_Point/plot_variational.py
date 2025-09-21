@@ -401,10 +401,10 @@ gamma_phi_complete_corrected_gc     = a0 + 2.0 * S.energy_files['total.energy'][
 gamma_gradphi_complete_corrected_gc = a0 + 2.0 * S.energy_files['total.energy']["gamma_gradphi"][:aux]/gc_factor
 lambda_complete_corrected_gc        = lambda_complete_equivalent
 
-header = ["displacement", "force", "gamma", "compliance", "stiffness", "dCda", "lambda"]
-data_save = np.column_stack((displacement_complete_corrected_gc, force_complete_corrected_gc, gamma_complete_corrected_gc, compliance_complete_corrected_gc,stiffness_complete_corrected_gc, dCda_complete_corrected_gc, lambda_complete_corrected_gc))
-save_path = os.path.join(Data.results_folder_name, "results_equivalent_bourdin.pff")
-np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(header), comments="")
+# header = ["displacement", "force", "gamma", "compliance", "stiffness", "dCda", "lambda"]
+# data_save = np.column_stack((displacement_complete_corrected_gc, force_complete_corrected_gc, gamma_complete_corrected_gc, compliance_complete_corrected_gc,stiffness_complete_corrected_gc, dCda_complete_corrected_gc, lambda_complete_corrected_gc))
+# save_path = os.path.join(Data.results_folder_name, "results_equivalent_bourdin.pff")
+# np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(header), comments="")
 
 # Load as pandas DataFrame using header from the first line of the file
 # data = pd.read_csv(save_path, delimiter="\t", comment="#", header=0)
