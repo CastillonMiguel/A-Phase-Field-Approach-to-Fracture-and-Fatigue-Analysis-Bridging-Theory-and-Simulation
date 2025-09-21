@@ -139,6 +139,8 @@ sphinx_gallery_conf = {
     # Sort gallery example by file name instead of number of lines (default)
     "within_subsection_order": FileNameSortKey,
     "subsection_order": ExplicitOrder([
+        '../../examples/LEFM',
+        '../../examples/Elasticity',
         '../../examples/GmshGeoFiles',
         '../../examples/Papers_Data',
     ]),
