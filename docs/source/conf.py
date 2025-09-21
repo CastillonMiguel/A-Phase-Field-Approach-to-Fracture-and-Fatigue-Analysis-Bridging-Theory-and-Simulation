@@ -141,6 +141,7 @@ sphinx_gallery_conf = {
         '../../examples/LEFM',
         '../../examples/Elasticity',
         '../../examples/Phase_Field_Three_Point',
+        '../../examples/Compare_Three_Point',
         '../../examples/GmshGeoFiles',
         '../../examples/Papers_Data',
     ]),
