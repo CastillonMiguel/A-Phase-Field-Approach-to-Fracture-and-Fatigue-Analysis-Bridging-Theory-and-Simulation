@@ -63,19 +63,19 @@ The Young's modulus, Poisson's ratio, and the critical energy release rate are p
 ###############################################################################
 # Import necessary libraries
 # --------------------------
-import numpy as np
-import dolfinx
-import mpi4py
-import petsc4py
+# import numpy as np
+# import dolfinx
+# import mpi4py
+# import petsc4py
 import os
 
 import pyvista as pv
-import pandas as pd
+# import pandas as pd
 import matplotlib.pyplot as plt
 import sys
-sys.path.insert(0, os.path.abspath('../../'))
-plt.style.use('../../graph.mplstyle')
-import plot_config as pcfg
+# sys.path.insert(0, os.path.abspath('../../'))
+# plt.style.use('../../graph.mplstyle')
+# import plot_config as pcfg
 
 ###############################################################################
 # Import from phasefieldx package
