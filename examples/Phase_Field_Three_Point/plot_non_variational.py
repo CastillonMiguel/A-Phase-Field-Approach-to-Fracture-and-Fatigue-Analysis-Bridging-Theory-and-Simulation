@@ -356,7 +356,7 @@ np.savetxt(save_path, data_save, fmt="%.6e", delimiter="\t", header="\t".join(he
 # Plot: Phase-Field
 # -----------------
 file_vtu = pv.read(os.path.join(Data.results_folder_name, "paraview-solutions_vtu", "phasefieldx_p0_000047.vtu"))
-# pv.start_xvfb()
+pv.start_xvfb()
 file_vtu.plot(scalars='phi', cpos='xy', show_scalar_bar=True, show_edges=False)
 
 ###############################################################################
