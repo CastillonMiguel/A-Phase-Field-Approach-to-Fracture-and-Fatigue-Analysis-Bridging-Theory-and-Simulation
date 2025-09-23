@@ -43,8 +43,8 @@ img = mpimg.imread('images/compact_specimen.png')
 plt.imshow(img)
 plt.axis('off')
 
-results_folder = "compact_tension"
-os.makedirs(results_folder, exist_ok=True)
+# results_folder = "compact_tension"
+# os.makedirs(results_folder, exist_ok=True)
 
 
 ###############################################################################
@@ -154,7 +154,7 @@ ax0.plot(a_pff_geo,  k_pff_geo, color=color_pff_geo, linestyle='-', marker='d', 
 ax0.set_xlabel(pcfg.crack_length_label)
 ax0.set_ylabel(pcfg.stiffness_label)
 ax0.legend()
-plt.savefig(os.path.join(results_folder, "compare_stiffness"))
+# plt.savefig(os.path.join(results_folder, "compare_stiffness"))
 
 
 ###############################################################################
@@ -174,7 +174,7 @@ ax2.set_ylim(bottom=-0.0125, top=0.175)  # Set the top y-limit
 ax2.set_xlim(left=7.0, right=34.0)  # Set the top y-limit
 
 # ax2.legend()
-plt.savefig(os.path.join(results_folder, "dCda_vs_crack_length"))
+# plt.savefig(os.path.join(results_folder, "dCda_vs_crack_length"))
 
 ###############################################################################
 # Fatigue
@@ -266,7 +266,7 @@ ax3.plot(Nf_dCda_pff_geo, a_fatigue_pff_geo, color=color_pff_geo, linestyle='-',
 ax3.set_ylabel(pcfg.crack_length_label)
 ax3.set_xlabel(pcfg.cycles_label)
 ax3.legend()
-plt.savefig(os.path.join(results_folder, "cycles_vs_crack_length"))
+# plt.savefig(os.path.join(results_folder, "cycles_vs_crack_length"))
 
 plt.show()
 

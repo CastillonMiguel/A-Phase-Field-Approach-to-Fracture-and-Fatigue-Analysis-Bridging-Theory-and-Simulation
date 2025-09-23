@@ -61,9 +61,9 @@ sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
 
-results_folder = "results_compare_lenght_scale"
-if not os.path.exists(results_folder):
-    os.makedirs(results_folder)
+# results_folder = "results_compare_lenght_scale"
+# if not os.path.exists(results_folder):
+#     os.makedirs(results_folder)
 
 
 ###############################################################################
@@ -166,7 +166,7 @@ ax_l1_uf.set_xlabel(pcfg.displacement_label)
 ax_l1_uf.set_ylabel(pcfg.force_label)
 ax_l1_uf.legend()
 
-plt.savefig(os.path.join(results_folder, "compare_all_l1_u_vs_force"))
+# plt.savefig(os.path.join(results_folder, "compare_all_l1_u_vs_force"))
 
 ###############################################################################
 # Plot: Displacement vs Force (Gamma)
@@ -188,7 +188,7 @@ ax_l2_uf.set_xlabel(pcfg.displacement_label)
 ax_l2_uf.set_ylabel(pcfg.force_label)
 ax_l2_uf.legend()
 
-plt.savefig(os.path.join(results_folder, "compare_all_l2_u_vs_force"))
+# plt.savefig(os.path.join(results_folder, "compare_all_l2_u_vs_force"))
 
 
 ###############################################################################
@@ -204,7 +204,7 @@ gamma.set_ylim(bottom=0.0, top=1.9)
 gamma.set_xlabel(pcfg.displacement_label)
 gamma.set_ylabel(pcfg.force_label)
 gamma.legend(loc='upper left')
-plt.savefig(os.path.join(results_folder, "compare_u_vs_force_l1_l2_lefm_corrected_gc"))
+# plt.savefig(os.path.join(results_folder, "compare_u_vs_force_l1_l2_lefm_corrected_gc"))
 
 
 ###############################################################################
@@ -221,7 +221,7 @@ gamma.set_ylim(bottom=50.0, top=80.0)
 gamma.set_xlabel(pcfg.displacement_label)
 gamma.set_ylabel(pcfg.force_label)
 # gamma.legend()
-plt.savefig(os.path.join(results_folder, "compare_displacement_vs_stiffness_l1_l2_lefm_corrected_gc"))
+# plt.savefig(os.path.join(results_folder, "compare_displacement_vs_stiffness_l1_l2_lefm_corrected_gc"))
 
 ###############################################################################
 # Plot: Gc-Corrected Crack Surface Area vs Stiffness
@@ -249,7 +249,7 @@ ax_reaction.set_xlabel(pcfg.crack_length_label)
 ax_reaction.set_ylabel(pcfg.stiffness_label)
 ax_reaction.legend()
 
-plt.savefig(os.path.join(results_folder, "gamma_compare_vs_k"))
+# plt.savefig(os.path.join(results_folder, "gamma_compare_vs_k"))
 
 
 ###############################################################################
@@ -277,6 +277,6 @@ ax0.set_ylabel(pcfg.critical_force_label)
 # ax0.legend()
 
 # Save the figure
-plt.savefig(os.path.join(results_folder, "critical_force_vs_crack_length_pff"))
+# plt.savefig(os.path.join(results_folder, "critical_force_vs_crack_length_pff"))
 
 plt.show()

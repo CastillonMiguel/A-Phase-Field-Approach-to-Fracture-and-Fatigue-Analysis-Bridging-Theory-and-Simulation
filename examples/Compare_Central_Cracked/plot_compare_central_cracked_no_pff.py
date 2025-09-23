@@ -42,10 +42,10 @@ img = mpimg.imread('images/central_cracked.png')  # or .jpg, .tif, etc.
 plt.imshow(img)
 plt.axis('off')
 
-results_folder = "results_central_cracked"
-if os.path.exists(results_folder):
-    shutil.rmtree(results_folder)
-os.makedirs(results_folder, exist_ok=True)
+# results_folder = "results_central_cracked"
+# if os.path.exists(results_folder):
+#     shutil.rmtree(results_folder)
+# os.makedirs(results_folder, exist_ok=True)
 
 
 ###############################################################################
@@ -129,7 +129,7 @@ ax0.set_ylabel(pcfg.stiffness_label)
 ax0.legend()
 
 # Save the figure
-plt.savefig(os.path.join(results_folder, "stiffness_vs_crack_length"))
+# plt.savefig(os.path.join(results_folder, "stiffness_vs_crack_length"))
 
 
 ###############################################################################
@@ -149,7 +149,7 @@ ax0.set_ylabel(pcfg.critical_force_label)
 # ax0.legend()
 
 # Save the figure
-plt.savefig(os.path.join(results_folder, "critical_force_vs_crack_length"))
+# plt.savefig(os.path.join(results_folder, "critical_force_vs_crack_length"))
 
 ###############################################################################
 # Crack length vs compliance
@@ -167,7 +167,7 @@ ax1.set_ylabel(pcfg.compliance_label)
 ax1.legend()
 
 # Save the figure
-plt.savefig(os.path.join(results_folder,"compliance_vs_crack_length") )
+# plt.savefig(os.path.join(results_folder,"compliance_vs_crack_length") )
 
 
 ###############################################################################
@@ -281,7 +281,7 @@ ax3.set_ylabel(pcfg.crack_length_label)
 ax3.set_xlabel(pcfg.cycles_label)
 ax3.legend()
 
-plt.savefig(os.path.join(results_folder, "cycles_vs_crack_length"))
+# plt.savefig(os.path.join(results_folder, "cycles_vs_crack_length"))
 
 
 # ###############################################################################
