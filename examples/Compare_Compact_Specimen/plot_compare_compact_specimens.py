@@ -53,10 +53,10 @@ img = mpimg.imread('images/compact_specimen_holes.png')
 plt.imshow(img)
 plt.axis('off')
 
-results_folder = "compact_phase_field"
-if os.path.exists(results_folder):
-    shutil.rmtree(results_folder)
-os.makedirs(results_folder, exist_ok=True)
+# results_folder = "compact_phase_field"
+# if os.path.exists(results_folder):
+#     shutil.rmtree(results_folder)
+# os.makedirs(results_folder, exist_ok=True)
 
 
 ###############################################################################
@@ -190,7 +190,7 @@ ax_paper2.set_xlabel(pcfg.displacement_label)
 ax_paper2.set_xlim(left=-0.03, right=1.0)
 ax_paper2.set_ylim(bottom=-1, top=22.3)
 
-plt.savefig(os.path.join(results_folder,"force_displacement_specimen_1"))
+# plt.savefig(os.path.join(results_folder,"force_displacement_specimen_1"))
 
 
 ###############################################################################
@@ -210,7 +210,7 @@ ax_paper2.set_xlabel(pcfg.displacement_label)
 ax_paper2.set_xlim(left=-0.03, right=1.0)
 ax_paper2.set_ylim(bottom=-1, top=22.3)
 ax_paper2.legend()
-plt.savefig(os.path.join(results_folder,"compare_force_displacement"))
+# plt.savefig(os.path.join(results_folder,"compare_force_displacement"))
 
 
 
@@ -322,7 +322,7 @@ ax_paper2.set_ylabel(pcfg.crack_length_label)
 ax_paper2.set_xlabel(pcfg.cycles_label)
 ax_paper2.legend(fontsize='medium', loc='best', frameon=True)
 ax_paper2.grid(True, linestyle='--', alpha=0.5)
-plt.savefig(os.path.join(results_folder, "compare_cycles_vs_crack_length_paper2"))
+# plt.savefig(os.path.join(results_folder, "compare_cycles_vs_crack_length_paper2"))
 
 ###############################################################################
 # Individual comparison: Simulation vs Paper Specimen 3
@@ -335,7 +335,7 @@ ax_paper3.set_ylabel(pcfg.crack_length_label)
 ax_paper3.set_xlabel(pcfg.cycles_label)
 ax_paper3.legend(fontsize='medium', loc='best', frameon=True)
 ax_paper3.grid(True, linestyle='--', alpha=0.5)
-plt.savefig(os.path.join(results_folder, "compare_cycles_vs_crack_length_paper3"))
+# plt.savefig(os.path.join(results_folder, "compare_cycles_vs_crack_length_paper3"))
 
 ###############################################################################
 # Individual comparison: Simulation vs Paper Specimen 4
@@ -348,7 +348,7 @@ ax_paper4.set_ylabel(pcfg.crack_length_label)
 ax_paper4.set_xlabel(pcfg.cycles_label)
 ax_paper4.legend(fontsize='medium', loc='best', frameon=True)
 ax_paper4.grid(True, linestyle='--', alpha=0.5)
-plt.savefig(os.path.join(results_folder, "compare_cycles_vs_crack_length_paper4"))
+# plt.savefig(os.path.join(results_folder, "compare_cycles_vs_crack_length_paper4"))
 
 
 ###############################################################################
@@ -374,7 +374,7 @@ ax3.set_xlabel(pcfg.cycles_label)
 ax3.legend(ncol=2, fontsize='medium', loc='best', frameon=True)
 ax3.grid(True, linestyle='--', alpha=0.5)
 
-plt.savefig(os.path.join(results_folder, "paper_compare_cycles_vs_crack_length"))
+# plt.savefig(os.path.join(results_folder, "paper_compare_cycles_vs_crack_length"))
 
 plt.show()
 

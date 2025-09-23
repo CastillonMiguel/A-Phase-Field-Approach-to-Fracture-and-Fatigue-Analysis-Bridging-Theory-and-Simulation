@@ -76,10 +76,10 @@ img = mpimg.imread('images/compact_specimen.png')  # or .jpg, .tif, etc.
 plt.imshow(img)
 plt.axis('off')
 
-results_folder = "results_compact_specimen"
-if os.path.exists(results_folder):
-    shutil.rmtree(results_folder)
-os.makedirs(results_folder, exist_ok=True)
+# results_folder = "results_compact_specimen"
+# if os.path.exists(results_folder):
+#     shutil.rmtree(results_folder)
+# os.makedirs(results_folder, exist_ok=True)
 
 # Colors reference from plot_config
 color_main = pcfg.color_blue
@@ -228,10 +228,10 @@ ax1.legend()
 ###############################################################################
 # Save results to file
 # --------------------
-results = np.column_stack((a, K, P_c, dCda))
-header = "a\tK\tPc\tdCda"
-np.savetxt(os.path.join(results_folder, "results.lefm"),
-           results, fmt="%.6e", delimiter="\t", header=header, comments="")
+# results = np.column_stack((a, K, P_c, dCda))
+# header = "a\tK\tPc\tdCda"
+# np.savetxt(os.path.join(results_folder, "results.lefm"),
+#            results, fmt="%.6e", delimiter="\t", header=header, comments="")
 
 
 ###############################################################################
@@ -275,33 +275,33 @@ u2, P2, a2, W2, E2, u_c_a02, P_c_a02 = get_u_P(ap0_points[1], a, P_c, C)
 u3, P3, a3, W3, E3, u_c_a03, P_c_a03 = get_u_P(ap0_points[2], a, P_c, C)
 
 
-header_curves = "a\tu\tP\tstrain_energy\tfracture_energy"
-results_1 = np.column_stack((a1, u1, P1, E1, W1))
-np.savetxt(
-    os.path.join(
-        results_folder,
-        f"a0_{str(ap0_points[0]).replace('.', '')}.lefm_problem"
-    ),
-    results_1, fmt="%.6e", delimiter="\t", header=header_curves, comments=""
-)
+# header_curves = "a\tu\tP\tstrain_energy\tfracture_energy"
+# results_1 = np.column_stack((a1, u1, P1, E1, W1))
+# np.savetxt(
+#     os.path.join(
+#         results_folder,
+#         f"a0_{str(ap0_points[0]).replace('.', '')}.lefm_problem"
+#     ),
+#     results_1, fmt="%.6e", delimiter="\t", header=header_curves, comments=""
+# )
 
-results_2 = np.column_stack((a2, u2, P2, E2, W2))
-np.savetxt(
-    os.path.join(
-        results_folder,
-        f"a0_{str(ap0_points[1]).replace('.', '')}.lefm_problem"
-    ),
-    results_2, fmt="%.6e", delimiter="\t", header=header_curves, comments=""
-)
+# results_2 = np.column_stack((a2, u2, P2, E2, W2))
+# np.savetxt(
+#     os.path.join(
+#         results_folder,
+#         f"a0_{str(ap0_points[1]).replace('.', '')}.lefm_problem"
+#     ),
+#     results_2, fmt="%.6e", delimiter="\t", header=header_curves, comments=""
+# )
 
-results_3 = np.column_stack((a3, u3, P3, E3, W3))
-np.savetxt(
-    os.path.join(
-        results_folder,
-        f"a0_{str(ap0_points[2]).replace('.', '')}.lefm_problem"
-    ),
-    results_3, fmt="%.6e", delimiter="\t", header=header_curves, comments=""
-)
+# results_3 = np.column_stack((a3, u3, P3, E3, W3))
+# np.savetxt(
+#     os.path.join(
+#         results_folder,
+#         f"a0_{str(ap0_points[2]).replace('.', '')}.lefm_problem"
+#     ),
+#     results_3, fmt="%.6e", delimiter="\t", header=header_curves, comments=""
+# )
 
 ###############################################################################
 # Plot: Displacement ($u$) vs. Force ($P$)
@@ -438,12 +438,12 @@ ax1.legend()
 
 plt.show()
 
-header_fatigue = "cycles\ta"
-results_fatigue = np.column_stack((Nf_dCda, a_fatigue))
-np.savetxt(
-    os.path.join(
-        results_folder,
-        f"a_{str(a0_fatigue).replace('.', '')}_{str(af_fatigue).replace('.', '')}.lefm_fatigue"
-    ),
-    results_fatigue, fmt="%.6e", delimiter="\t", header=header_fatigue, comments=""
-)
+# header_fatigue = "cycles\ta"
+# results_fatigue = np.column_stack((Nf_dCda, a_fatigue))
+# np.savetxt(
+#     os.path.join(
+#         results_folder,
+#         f"a_{str(a0_fatigue).replace('.', '')}_{str(af_fatigue).replace('.', '')}.lefm_fatigue"
+#     ),
+#     results_fatigue, fmt="%.6e", delimiter="\t", header=header_fatigue, comments=""
+# )

@@ -21,9 +21,9 @@ sys.path.insert(0, os.path.abspath('../../'))
 plt.style.use('../../graph.mplstyle') 
 import plot_config as pcfg
 
-results_folder = "results_compare_fatigue"
-if not os.path.exists(results_folder):
-    os.makedirs(results_folder)
+# results_folder = "results_compare_fatigue"
+# if not os.path.exists(results_folder):
+#     os.makedirs(results_folder)
 
 
 ###############################################################################
@@ -122,7 +122,7 @@ ax_reaction.set_xlabel(pcfg.crack_length_label)
 ax_reaction.set_ylabel(pcfg.stiffness_label)
 ax_reaction.legend()
 
-plt.savefig(os.path.join(results_folder, "gamma_compare_vs_k"))
+# plt.savefig(os.path.join(results_folder, "gamma_compare_vs_k"))
 
 
 ###############################################################################
@@ -147,7 +147,7 @@ ax0.set_ylabel(pcfg.critical_force_label)
 # ax0.legend()
 
 # Save the figure
-plt.savefig(os.path.join(results_folder, "critical_force_vs_crack_length_pff"))
+# plt.savefig(os.path.join(results_folder, "critical_force_vs_crack_length_pff"))
 
 
 
@@ -271,6 +271,6 @@ ax5.set_ylim(bottom= 0.37, top=1.1)
 ax5.set_ylabel(pcfg.crack_length_label)
 ax5.set_xlabel(pcfg.cycles_label)
 ax5.legend()
-plt.savefig(os.path.join(results_folder, "compare_paris_law_phase_field"))
+# plt.savefig(os.path.join(results_folder, "compare_paris_law_phase_field"))
 
 plt.show()
